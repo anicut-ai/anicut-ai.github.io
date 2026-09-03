@@ -3,33 +3,151 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>embodied-sync documentation</title>
-  <meta name="description" content="Synchronization assurance for robot sensor streams and datasets.">
-  <style>body{max-width:50rem;margin:3rem auto;padding:0 1rem;font:16px system-ui,sans-serif;line-height:1.6;color:#17202a}a{color:#075985}code{background:#eef2f7;padding:.1rem .25rem;border-radius:.2rem}</style>
+  <title>embodied-sync: Python Sensor Synchronization for Robot Learning</title>
+  <meta name="description" content="Open-source Python library to synchronize, calibrate, validate, and stress-test multi-sensor robot-learning datasets and live streams across clock domains.">
+  <link rel="canonical" href="https://anicut-ai.github.io/embodied-sync/">
+  <link rel="stylesheet" href="site.css">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="embodied-sync — multi-sensor synchronization for robot learning">
+  <meta property="og:description" content="Align and validate robot-learning data across cameras, robot state, audio, tactile sensors, clocks, and ecosystems.">
+  <meta property="og:url" content="https://anicut-ai.github.io/embodied-sync/">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "embodied-sync",
+    "alternateName": "embsync",
+    "description": "Open-source Python library for synchronizing, calibrating, aligning, replaying, validating, and stress-testing multimodal robot-learning sensor data.",
+    "codeRepository": "https://github.com/anicut-ai/embodied-sync",
+    "url": "https://anicut-ai.github.io/embodied-sync/",
+    "downloadUrl": "https://pypi.org/project/embodied-sync/",
+    "programmingLanguage": "Python",
+    "runtimePlatform": "Python 3.10+",
+    "license": "https://github.com/anicut-ai/embodied-sync/blob/main/LICENSE",
+    "applicationCategory": "Robotics software",
+    "keywords": "robot learning, multi-sensor synchronization, temporal alignment, clock skew, clock drift, late packets, LeRobot, LSL, Python"
+  }
+  </script>
 </head>
 <body>
+  <header>
+    <a class="brand" href="./">embodied-sync</a>
+    <nav aria-label="Primary navigation">
+      <a href="robot-learning-dataset-synchronization.html">Dataset sync</a>
+      <a href="lerobot-timestamp-validation.html">LeRobot validation</a>
+      <a href="latency-jitter-robot-policy-testing.html">Robustness</a>
+      <a href="multi-clock-sensor-stream-synchronization.html">Multi-clock streams</a>
+      <a href="https://github.com/anicut-ai/embodied-sync">GitHub</a>
+    </nav>
+  </header>
   <main>
-    <h1>embodied-sync</h1>
-    <p>Synchronization assurance for robot sensor streams and datasets.</p>
-    <h2>Worked example</h2>
-    <p><a href="rh20t-inspection.html">RH20T synchronization inspection</a> &mdash; two cameras in one
-    episode of a public dataset, with the chosen pairing shown next to the neighbours it rejected.</p>
-    <h2>Start with a task</h2>
-    <ul>
-      <li><a href="https://github.com/anicut-ai/embodied-sync/blob/main/docs/user/quickstart.md">Synchronize robot sensor streams in Python</a></li>
-      <li><a href="https://github.com/anicut-ai/embodied-sync/blob/main/docs/user/sync_session_api.md">Message-filters-style synchronization without ROS</a></li>
-      <li><a href="https://github.com/anicut-ai/embodied-sync/blob/main/docs/user/choosing_alignment_policy.md">Choose an alignment policy</a></li>
-      <li><a href="https://github.com/anicut-ai/embodied-sync/blob/main/docs/user/interpreting_sync_reports.md">Interpret a sync-quality report</a></li>
-      <li><a href="https://github.com/anicut-ai/embodied-sync/blob/main/examples/notebooks/hardware_ground_truth_capture_protocol.ipynb">Run the hardware-ground-truth capture protocol</a></li>
-    </ul>
-    <h2>Understand the model</h2>
-    <ul>
-      <li><a href="https://github.com/anicut-ai/embodied-sync/blob/main/docs/concepts/timestamps_clock_domains.md">Timestamps and clock domains</a></li>
-      <li><a href="https://github.com/anicut-ai/embodied-sync/blob/main/docs/concepts/latency_vs_jitter_vs_drift.md">Latency, jitter, and drift</a></li>
-      <li><a href="https://github.com/anicut-ai/embodied-sync/blob/main/docs/concepts/online_vs_offline_alignment.md">Online versus offline alignment</a></li>
-      <li><a href="https://github.com/anicut-ai/embodied-sync/blob/main/docs/acceptance_report_template.md">Acceptance-report template</a></li>
-    </ul>
-    <p><a href="https://github.com/anicut-ai/embodied-sync">Source on GitHub</a> · <a href="sitemap.xml">Sitemap</a></p>
+    <section class="hero">
+      <p class="eyebrow">Open-source · Python · ecosystem agnostic</p>
+      <h1>Sensor synchronization you can inspect.</h1>
+      <p class="lede"><strong>embodied-sync</strong> is an open-source Python library for synchronizing and validating multimodal robot-learning data. Align cameras, robot state, actions, audio, force, and tactile streams across different rates and clock domains—then see the skew, missing samples, stale observations, and alignment choices before they reach a policy.</p>
+      <div class="actions">
+        <a class="button" href="https://pypi.org/project/embodied-sync/">Install from PyPI</a>
+        <a class="button secondary" href="https://github.com/anicut-ai/embodied-sync">View source</a>
+      </div>
+      <pre aria-label="Install embodied-sync"><code>pip install embodied-sync</code></pre>
+    </section>
+
+    <section aria-labelledby="problems">
+      <p class="eyebrow">One timing model</p>
+      <h2 id="problems">Recorded datasets and live robots fail differently</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Align robot-learning datasets</h3>
+          <p>Build policy-rate frames with nearest-neighbor, zero-order hold, linear interpolation, or a per-stream policy. Every chosen sample keeps its skew, confidence, and missing status.</p>
+          <p><a href="robot-learning-dataset-synchronization.html">Python dataset synchronization guide →</a></p>
+        </article>
+        <article class="card">
+          <h3>Validate timestamps and sync quality</h3>
+          <p>Measure missing rate, median and tail skew, source frequency, and alignment decisions. Generate portable HTML and JSON reports for dataset review or CI gates.</p>
+          <p><a href="lerobot-timestamp-validation.html">Validate a LeRobot dataset →</a></p>
+        </article>
+        <article class="card">
+          <h3>Stress-test latency and jitter</h3>
+          <p>Inject known fixed latency, receive jitter, clock drift, dropped frames, burst stalls, duplicates, non-monotonic delivery, and missing intervals into deterministic recordings.</p>
+          <p><a href="latency-jitter-robot-policy-testing.html">Test robot-policy timing robustness →</a></p>
+        </article>
+        <article class="card">
+          <h3>Handle clocks and late packets</h3>
+          <p>Keep acquisition time separate from receive time, map device clocks explicitly, and synchronize causally without assuming all timestamps share an epoch.</p>
+          <p><a href="multi-clock-sensor-stream-synchronization.html">Multi-clock and late-packet guide →</a></p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="formats">
+      <h2 id="formats">Fits around the robotics tools you already use</h2>
+      <p>embodied-sync normalizes timing without requiring ROS or replacing the recorder, dataset format, visualization stack, or sensor SDK you already chose.</p>
+      <p>
+        <span class="tag">LeRobot v3</span>
+        <span class="tag">ROS 2 / rosbag2</span>
+        <span class="tag">MCAP</span>
+        <span class="tag">LSL / XDF</span>
+        <span class="tag">UMI-style data</span>
+        <span class="tag">Rerun</span>
+        <span class="tag">SurgSync</span>
+        <span class="tag">Custom datasets</span>
+      </p>
+      <div class="callout"><strong>Scope matters:</strong> this is temporal calibration and alignment, not camera intrinsics, extrinsics, or LiDAR-to-camera spatial calibration. Adapter depth varies by format; the <a href="https://github.com/anicut-ai/embodied-sync#current-scope">current-scope table</a> documents what works today.</div>
+    </section>
+
+    <section aria-labelledby="workflow">
+      <h2 id="workflow">A synchronization workflow with evidence</h2>
+      <ol class="steps">
+        <li><strong>Preserve both times.</strong> Keep when a measurement was acquired distinct from when its packet arrived.</li>
+        <li><strong>Map clock domains.</strong> Estimate offset and drift from physical events instead of treating unrelated device nanoseconds as comparable.</li>
+        <li><strong>Choose alignment semantics.</strong> Select causal or offline alignment and a method appropriate to each modality.</li>
+        <li><strong>Validate the result.</strong> Review skew distributions, missingness, staleness, and the actual neighboring frames the aligner rejected.</li>
+        <li><strong>Rehearse failures.</strong> Apply known timing corruptions and test how preprocessing, observation assembly, and policy evaluation respond.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="example">
+      <h2 id="example">Start with a reproducible timing failure</h2>
+      <pre><code>embsync synth --out runs/clean --seed 0 --duration-s 10
+embsync corrupt runs/clean \
+  --profile configs/corrupt_kitchen_sink.yaml \
+  --out runs/bad
+embsync align runs/bad --out episodes/bad_10hz \
+  --target-rate-hz 10 --check-ground-truth
+embsync report episodes/bad_10hz \
+  --out reports/bad.html --json-summary reports/bad.json</code></pre>
+      <p>The corruption ground truth makes the example testable: you know what delay, drift, drops, or stalls were introduced, and can compare that truth with the aligned episode and sync-quality report.</p>
+    </section>
+
+    <section aria-labelledby="choose">
+      <h2 id="choose">Is embodied-sync the right library?</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Need</th><th>Fit</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>Validate temporal alignment in a robot-learning dataset</td><td>Yes</td><td>Reports retain per-frame skew, confidence, missingness, and alignment policy.</td></tr>
+            <tr><td>Synchronize heterogeneous live Python callbacks without ROS</td><td>Yes</td><td><code>SyncSession</code> assembles causal bundles and surfaces late, stale, or unmapped streams.</td></tr>
+            <tr><td>Estimate device-clock offset or drift</td><td>Yes</td><td>Clock-domain mappings can be fitted from event trains, claps, or visual timestamps.</td></tr>
+            <tr><td>Simulate inference latency and network jitter</td><td>Partial</td><td>The corruption engine changes recorded timing for reproducible offline tests; it is not a network or physics simulator.</td></tr>
+            <tr><td>Calibrate camera intrinsics or sensor extrinsics</td><td>No</td><td>Use a spatial calibration toolbox; embodied-sync focuses on time.</td></tr>
+            <tr><td>Hard real-time scheduling or PTP configuration</td><td>No</td><td>The library validates and aligns data but does not configure hardware clocks or promise real-time deadlines.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="faq">
+      <h2 id="faq">Frequently asked questions</h2>
+      <details><summary>Does embodied-sync require ROS?</summary><p>No. The core is a Python library with NumPy and PyYAML dependencies. ROS 2 recordings can enter through MCAP, but live synchronization also works around ordinary SDK callbacks and polling loops.</p></details>
+      <details><summary>Can it check LeRobot dataset synchronization?</summary><p>Yes. The LeRobot v3 path preserves timestamps and episode boundaries, produces a normalized run, and supports alignment plus HTML or JSON sync-quality reports.</p></details>
+      <details><summary>How does it handle clock skew and clock drift?</summary><p>Each stream declares a clock domain. A mapping relates source time to reference time with an offset and, when the evidence supports it, a rate term for drift. Unmapped clocks are treated as a quality violation rather than silently compared.</p></details>
+      <details><summary>Does it support LSL clock synchronization?</summary><p>It reads LabRecorder XDF and retains LSL time-correction information so corrected and raw timing can be inspected. LSL performs online clock synchronization; embodied-sync adds replay, robot-learning alignment, and validation around the recording.</p></details>
+    </section>
   </main>
+  <footer>
+    <p><strong>embodied-sync</strong> is open-source robotics software released under Apache-2.0.</p>
+    <p><a href="https://github.com/anicut-ai/embodied-sync">GitHub</a> · <a href="https://pypi.org/project/embodied-sync/">PyPI</a> · <a href="rh20t-inspection.html">RH20T inspection example</a> · <a href="llms.txt">LLM project summary</a></p>
+  </footer>
 </body>
 </html>
